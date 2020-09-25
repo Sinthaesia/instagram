@@ -25,4 +25,4 @@ function Post({ username, caption, imageUrl }) {
     );
 }
 
-export default Post
+export default Post;
