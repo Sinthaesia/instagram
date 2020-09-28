@@ -1,0 +1,24 @@
+.imageupload {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 10px auto 10px auto;
+    background-color: white;
+    height: 200px;
+    justify-content: space-around;
+}
+
+.imageupload__progress {
+    width: 100%;
+    height: 1.5rem;
+}
+
+.imageupload__caption{
+    padding: .8rem;
+    min-height: 1rem;
+    border: 1px solid lightgray;
+    border-radius: 15px;
+    &:focus{
+        border: 1px solid black;
+    }
+}
