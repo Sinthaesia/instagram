@@ -1,112 +1,109 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
-*{
+* {
   margin: 0;
-  padding: 0;
 }
 
-.app{
+.app {
   background-color: #fafafa;
+  padding-bottom: 100px;
 }
 
-.app__button-login{
-  font-family: 'Open Sans', sans-serif;
-  border-bottom: 1px solid lightgray !important;
-  margin-right: 10px !important;
-  letter-spacing: .1px !important;
-  font-weight: 500 !important;
-  transition: all 0.3s ease;
-  &:hover{
-    border-bottom: 1px solid darkgray !important;
-  }
-}
-.app__button-logout{
-  border: 1px solid lightgray !important;
-  font-weight: 400 !important;
-  color: rgba(128, 128, 128, 0.75) !important;
-  box-shadow: 0 0 12px rgba(0,0,0,.17);
-  font-family: 'Open Sans', sans-serif;
-  transition: all .3s ease;
-  &:hover{
-    border: 1px solid darkgray !important;
-  }
-}
-.app__button-signup{
-  border: 1px solid lightgray !important;
-  box-shadow: 0 0 12px rgba(0,0,0,.17);
-  font-family: 'Open Sans', sans-serif;
-  transition: all .3s ease !important;
-  font-weight: 600 !important;
-  letter-spacing: .1px !important;
-  &:hover{
-    border: 1px solid darkgray !important;
-  }
+.app__login {
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  justify-content: center;
+  padding: 20px;
+  background-color: white;
+  // border: 1px solid lightgray;
 }
 
-.app__posts{
+.logout__button{
+  border: 1px solid lightgray !important;
+  font-weight: bold !important;
+  color: lightgray !important;
+  margin-left: 20px !important;
+}
+
+.login__image{
+  padding: 20px;
+}
+
+.login__modal{
+  padding: 60px;
+}
+
+.login__email, .login__password{
+  margin: 15px 0;
+}
+.login__button{
+  margin: 15px 0 !important;
+  border: 1px solid lightgray !important;
+}
+
+.login__register{
+  text-align: center;
+  padding: 15px 0;
+}
+
+.app__loginHome {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid lightgray;
+}
+
+.app__upload {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  border-top: 1px solid lightgray;
+  text-align: center;
   padding: 20px;
   display: flex;
   justify-content: center;
 }
 
-.app__postsRight{
-  margin-left: 20px;
+.app__headerImage {
+  object-fit: contain;
 }
 
-.app__header{
+.app__headerRight {
+  display: flex;
+  align-items: center;
+}
+
+.app__headerRight > p {
+  margin-right: 5px;
+}
+
+.app__headerAvatar {
+  height: 30px !important;
+  width: 30px !important;
+}
+
+.app__header {
   position: sticky;
   top: 0;
-  background-color: white;
-  padding: 20px;
-  border-bottom: 1px solid lightgray;
-  object-fit: contain;
   display: flex;
   justify-content: space-between;
   z-index: 1;
+  padding: 20px;
+  background-color: #ffffff;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 10px;
 }
 
-.app__headerImage{
-  object-fit: contain;
-  cursor: pointer;
-}
-
-.app__signup{
+.app__posts {
   display: flex;
-  flex-direction: column;
-  text-align: center;
-  .modal__input{
-    margin: 0 0 10px 0;
-    padding: 3px 7px;
-  }
-  .modal__button{
-    border: 1px solid lightgray !important;
-    margin: 15px auto 0 auto;
-    font-weight: 600;
-    color: black;
-    &:hover{
-      border: 1px solid black !important;
-    }
-  }
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 10px 30px;
 }
 
-.upload__login{
-  margin: auto;
-}
-
-.upload__information{
-  font-size: 30px;
-  color: cyan;
-  background: black;
-  padding: .5rem 1rem;
-}
-
-@media (max-width: 992px){
-  .app__insta-embed{
-    display: none;
-  }
-  .app__posts{
-    overflow: hidden;
-    margin: 0 auto;
-    width: 100vw;
-    padding: 10px;
-  }
+.app__postsRight {
+  margin-left: 10px;
 }

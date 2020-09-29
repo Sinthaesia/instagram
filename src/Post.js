@@ -1,62 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import './Post.scss';
-import { db } from './firebase';
-import Avatar from '@material-ui/core/Avatar';
-import firebase from 'firebase';
+import React, { useState, useEffect, forwardRef } from "react";
+import "./Post.scss";
+import Avatar from "@material-ui/core/Avatar";
+import { db } from "./firebase";
+// import firebase from "firebase";
 
-function Post({ postId, user, username, caption, imageUrl }) {
-  const [comments, setComments] = useState([]);
-  const [comment, setComment] = useState('');
+const Post = forwardRef(
+  ({ user, username, postId, imageUrl, caption }, ref) => {
+    const [comments, setComments] = useState([]);
+    const [comment, setComment] = useState("");
 
-  useEffect(() => {
-    let unsubscribe;
-    if (postId) {
-      unsubscribe = db
-        .collection("posts")
-        .doc(postId)
-        .collection("comments")
-        .orderBy('timestamp', 'asc')
-        .onSnapshot((snapshot) => {
-          setComments(snapshot.docs.map((doc) => doc.data()));
-        });
-    }
+    useEffect(() => {
+      let unsubscribe;
+      if (postId) {
+        unsubscribe = db
+          .collection("posts")
+          .doc(postId)
+          .collection("comments")
+          .onSnapshot((snapshot) => {
+            setComments(snapshot.docs.map((doc) => doc.data()));
+          });
+      }
 
-    return () => {
-      unsubscribe();
+      return () => {
+        unsubscribe();
+      };
+    }, [postId]);
+
+    const postComment = (e) => {
+      e.preventDefault();
+
+      db.collection("posts").doc(postId).collection("comments").add({
+        text: comment,
+        username: user.displayName,
+      });
+      setComment("");
     };
-  }, [postId]);
-
-  const postComment = (event) => {
-    event.preventDefault();
-
-    db.collection("posts").doc(postId).collection("comments").add({
-      text: comment,
-      username: user.displayName,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    setComment('');
-  }
 
     return (
-      <div className="post">
+      <div className="post" ref={ref}>
         <div className="post__header">
           <Avatar
             className="post__avatar"
-            alt="Sinthaesia"
+            alt={username}
             src="/img/dogvatar.jpg"
           />
           <h3>{username}</h3>
         </div>
 
-        <img className="post__image" src={imageUrl} alt="ReactJS IG Clone" />
-
+        <img className="post__image" src={imageUrl} alt="post" />
         <h4 className="post__text">
-          <strong>{username}</strong> {caption}
+          <strong>{username}</strong>{" "}
+          <span className="post__caption">{caption}</span>
         </h4>
 
         <div className="post__comments">
           {comments.map((comment) => (
-            <p>
+            <p className="post__comments-paragraph">
               <strong>{comment.username}</strong> {comment.text}
             </p>
           ))}
@@ -82,7 +81,8 @@ function Post({ postId, user, username, caption, imageUrl }) {
           </form>
         )}
       </div>
-    )
-}
+    );
+  }
+);
 
 export default Post;

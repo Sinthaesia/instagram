@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { Button } from "@material-ui/core";
+import { Input, Button } from "@material-ui/core";
 import firebase from 'firebase';
 import { storage, db } from './firebase';
 import './ImageUpload.scss';
 
-function ImageUpload({username}) {
+
+const ImageUpload = ({username}) => {
 
     const [image, setImage] = useState(null);
+    const [url, setUrl] = useState("");
     const [progress, setProgress] = useState(0);
     const [caption, setCaption] = useState('');
 
@@ -46,10 +48,10 @@ function ImageUpload({username}) {
                     .then(url => {
                         // post image inside of db
                         db.collection('posts').add({
-                            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                             caption: caption,
                             imageUrl: url,
-                            username: username
+                            username: username,
+                            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                         });
                         setProgress(0);
                         setCaption("");
@@ -61,14 +63,30 @@ function ImageUpload({username}) {
 
     return (
       <div className="imageupload">
-        <progress className="imageupload__progress" value={progress} max="100" />
-        <input className="imageupload__caption" type="text" placeholder="Enter a caption..." onChange={event => setCaption(event.target.value)} value={caption} />
-        <input className="imageupload__file" type="file" onChange={handleChange} />
-        <Button className="imageupload__button" onClick={handleUpload}>
+        <div className="imageupload__container">
+          <progress
+            className="imageupload__progress"
+            value={progress}
+            max="100"
+          />
+          <input
+            className="imageupload__caption"
+            type="text"
+            placeholder="Enter a caption..."
+            onChange={(event) => setCaption(event.target.value)}
+            value={caption}
+          />
+          <input
+            className="imageupload__file"
+            type="file"
+            onChange={handleChange}
+          />
+          <Button className="imageupload__button" onClick={handleUpload}>
             Upload
-        </Button>
+          </Button>
+        </div>
       </div>
-    )
-}
+    );
+};
 
-export default ImageUpload
+export default ImageUpload;
